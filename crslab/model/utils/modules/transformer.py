@@ -44,11 +44,15 @@ def create_position_codes(n_pos, dim, out):
         for pos in range(n_pos)
     ])
 
-    out[:, 0::2] = torch.tensor(np.sin(position_enc)).type_as(out)
-    out[:, 1::2] = torch.tensor(np.cos(position_enc)).type_as(out)
-    out.detach_()
+#     out[:, 0::2] = torch.tensor(np.sin(position_enc)).type_as(out)
+#     out[:, 1::2] = torch.tensor(np.cos(position_enc)).type_as(out)
+#     out.detach_()
+#     out.requires_grad = False
+    out.data[:, 0::2] = torch.tensor(np.sin(position_enc)).type_as(out)
+    out.data[:, 1::2] = torch.tensor(np.cos(position_enc)).type_as(out.data)
+    out.data.detach_()
+    out = out.data
     out.requires_grad = False
-
 
 def _normalize(tensor, norm_layer):
     """Broadcast layer norm"""
