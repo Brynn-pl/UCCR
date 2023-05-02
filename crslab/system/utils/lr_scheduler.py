@@ -115,8 +115,9 @@ class ReduceLROnPlateau(LRScheduler):
     def __init__(self, optimizer, mode='min', factor=0.1, patience=10, verbose=False, threshold=0.0001,
                  threshold_mode='rel', cooldown=0, min_lr=0, eps=1e-08, warmup_steps=0):
         super(ReduceLROnPlateau, self).__init__(optimizer, warmup_steps)
-        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode, factor, patience, verbose, threshold,
-                                                              threshold_mode, cooldown, min_lr, eps)
+#         self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode, factor, patience, verbose, threshold,
+#                                                               threshold_mode, cooldown, min_lr, eps)
+        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode, factor, patience, threshold, threshold_mode, cooldown, min_lr, eps, verbose)
 
     def train_adjust(self):
         pass
